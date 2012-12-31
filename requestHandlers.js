@@ -15,7 +15,7 @@ function configure(app){
 		//console.log("\n\n");
 		
 		console.log("Hello World.");
-		writeGoodHtmlResponse(response, ejs.render(helloWorldStr, {debug:true}));
+		writeGoodHtmlResponse(response, ejs.render(helloWorldStr, {filename: "views/index.ejs", debug:true}));
 	});
 	
 	app.get("/newGame", function newGame(request, response){

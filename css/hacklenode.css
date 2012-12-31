@@ -1,0 +1,41 @@
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	padding: 5px;
+	width: 100%;
+	background-color: #333388;
+}
+
+*, body{
+	font-family: verdana;
+}
+
+#header h1{
+	color: #f8f8f8;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+#main-content{
+	width: 90%;
+	max-width: 800px;
+	margin: 5px auto 10px auto;
+	padding: 10px;
+	background-color: #f8f8f8;
+	box-shadow: 0 0 8px rgba(200, 200, 200, 0.8);
+	border-radius: 5px;
+}
+
+#footer{
+	color: #c6c6c6;
+	font-size: 0.9em;
+	text-align: center;
+}
+
+#footer a{
+	color: #c6c6c6;
+}
