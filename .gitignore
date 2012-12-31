@@ -1,0 +1,4 @@
+# Ignore Stuff
+.project
+/.settings/
+/.metadata/
