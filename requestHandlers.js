@@ -1,28 +1,48 @@
 
+var fs = require("fs");
 var ejs = require("ejs");
 
-function helloWorld(response){
-	console.log("Hello World.");
-	writeGoodTextPlainResponse(response, "Hey, now...");
+function configure(app){
+	
+	console.log("configuring requestHandlers...");
+	
+	app.get("/", function helloWorld(request, response){
+		var helloWorldStr = fs.readFileSync("views/index.ejs", "utf8");
+		console.log(helloWorldStr + "\n\n");
+		
+		//console.log("Compiling...");
+		//var helloWorldTemplate = ejs.compile(helloWorldStr, {debug:true});
+		//console.log("\n\n");
+		
+		console.log("Hello World.");
+		writeGoodHtmlResponse(response, ejs.render(helloWorldStr, {debug:true}));
+	});
+	
+	app.get("/newGame", function newGame(request, response){
+		console.log("New Game.");
+		writeGoodTextPlainResponse(response, "Would you like to play a game?");
+	});
+	
+	app.get("/fire", function fire(request, response){
+		console.log("Fire!");
+		writeGoodTextPlainResponse(response, "Fired!");
+	});
+	
 }
 
-function newGame(response){
-	console.log("New Game.");
-	writeGoodTextPlainResponse(response, "Would you like to play a game?");
-}
-
-function fire(response){
-	console.log("Fire!");
-	writeGoodTextPlainResponse(response, "Fired!");
+function writeGoodHtmlResponse(response, content){
+	writeGoodResponse(response, "text/html", content);
 }
 
 function writeGoodTextPlainResponse(response, content){
+	writeGoodResponse(response, "text/plain", content);
+}
+
+function writeGoodResponse(response, contentType, content){
 	response.writeHead(200, {
-		"Content-Type" : "text/plain"
+		"Content-Type" : contentType
 	});
 	response.end(content + "\n");
 }
 
-exports.helloWorld = helloWorld;
-exports.newGame = newGame;
-exports.fire = fire;
+exports.configure = configure;
