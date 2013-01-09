@@ -7,15 +7,16 @@ function configure(app){
 	console.log("configuring requestHandlers...");
 	
 	app.get("/", function helloWorld(request, response){
+		
 		var helloWorldStr = fs.readFileSync("views/index.ejs", "utf8");
-		console.log(helloWorldStr + "\n\n");
+		//console.log(helloWorldStr + "\n\n");
 		
 		//console.log("Compiling...");
 		//var helloWorldTemplate = ejs.compile(helloWorldStr, {debug:true});
 		//console.log("\n\n");
 		
 		console.log("Hello World.");
-		writeGoodHtmlResponse(response, ejs.render(helloWorldStr, {filename: "views/index.ejs", debug:true}));
+		writeGoodHtmlResponse(response, ejs.render(helloWorldStr, {filename: "views/index.ejs", debug:false}));
 	});
 	
 	app.get("/newGame", function newGame(request, response){

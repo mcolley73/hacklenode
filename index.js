@@ -10,8 +10,9 @@ var app = express();
 
 console.log("prepping static directories...");
 app.use("/css", express.static("css"));
+app.use("/js", express.static("js"));
 
 requestHandlers.configure(app);
 
-console.log("listening...");
+console.log("listening on port 1337...");
 app.listen("1337");

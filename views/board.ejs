@@ -1,0 +1,34 @@
+<script>
+	$(document).ready(function(){
+		$("#board-radar .coord[x-hacklenode-coord]").on("hover", function(){
+			consoleLog($(this).attr("x-hacklenode-coord"));
+		});
+	});
+</script>
+
+<div id="board-container">
+	<% 
+		var layouts = ["board-radar","board-ocean"];
+		var cols = ["A","B","C","D","E","F","G","H","I","J"]; 
+		var rows = [1,2,3,4,5,6,7,8,9,10];
+	%>
+		
+	<% layouts.forEach(function(layout){ %>
+	<div id="<%=layout%>">
+			<div class="col-headers">
+				<div class="coord row-label">&nbsp;</div>
+				<% cols.forEach(function(col){ %>
+					<div class="coord coord-label"><%= col %></div>
+				<% }); %>
+			</div>
+			<% rows.forEach(function(row){ %>
+			<div class="row" class="board-layout">
+				<div class="coord row-label"><%=row%></div>
+				<% cols.forEach(function(col){ %>
+				<div class="coord" x-hacklenode-coord="<%= col%>,<%=row%>">&nbsp;</div>
+				<% }); %>
+			</div>
+			<% }); %>
+	</div>
+	<% }); %>
+</div>

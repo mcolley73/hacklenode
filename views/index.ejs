@@ -3,17 +3,26 @@
 <head>
 	<title>Hacklenode</title>
 	<link rel="stylesheet" href="/css/hacklenode.css" type="text/css" />
+	
+	<script type="text/javascript" src="/js/common.js"></script>
+	<script type="text/javascript" src="/js/ext/jquery-1.8.2.min.js"></script>
 </head>
 <body>
 
-	<% include header %>
+	<div id="page-width">
+	
+		<% include header %>
 
-	<div id="main-content">
-		<h2>Hey now...</h2>
-		<button onclick="/newGame">New Game</button>
+		<div id="main-content" class="clearfix">
+			<div id="control-panel" class="clearfix">
+				<button onclick="/newGame">New Game</button>
+			</div>
+			<% include board %>
+		</div>
+		
+		<% include footer %>
+		
 	</div>
-
-	<% include footer %>
 
 </body>
 </html>

@@ -20,11 +20,16 @@ body{
 	text-align: center;
 }
 
-#main-content{
+#page-width{
 	width: 90%;
 	max-width: 800px;
-	margin: 5px auto 10px auto;
-	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#main-content{
+	margin: 5px 0px 10px 0px;
+	width: 100%;
 	background-color: #f8f8f8;
 	box-shadow: 0 0 8px rgba(200, 200, 200, 0.8);
 	border-radius: 5px;
@@ -38,4 +43,91 @@ body{
 
 #footer a{
 	color: #c6c6c6;
+}
+
+#control-panel{
+	margin: 10px;
+	padding: 5px;
+	float: right;
+	border: 1px solid #888;
+	border-radius: 3px;
+}
+
+#control-panel button{
+	padding: 4px;
+	font-weight:bold;
+}
+
+#board-container{
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #aaa;
+	clear: both;
+	border-radius: 5px;
+}
+
+#board-radar{
+	border: 2px solid #aa5555;
+	background-color: #cc7777;
+	box-shadow: 0 0 8px rgba(200, 100, 100, 0.8);
+}
+
+#board-ocean{
+	margin-top: 10px;
+	border: 2px solid #5555aa;
+	background-color: #7777cc;
+	box-shadow: 0 0 8px rgba(100, 100, 200, 0.8);
+}
+
+#board-radar, #board-ocean{
+	padding: 5px;
+	border-radius: 5px;
+	margin-left:auto;
+	margin-right:auto;
+	width: 407px;	
+}
+
+
+.coord{
+	width:   30px;
+	height:  30px;
+	display: inline-block;
+	border:  1px solid black;
+	margin:  0px;
+	padding: 0px;
+	background-color: #ebebeb;
+}
+.col-headers .coord{
+	height: 25px;
+	text-align: center;
+	background-color: #c8c8c8;
+}
+.row-label.coord{
+	width: 25px;
+	text-align: center;
+	background-color: #c8c8c8;
+}
+
+
+
+/* ** Clearfix ** */
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
 }
