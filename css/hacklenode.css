@@ -46,24 +46,36 @@ body{
 }
 
 #control-panel{
-	margin: 10px;
-	padding: 5px;
-	float: right;
-	border: 1px solid #888;
-	border-radius: 3px;
+	float: left;
 }
 
 #control-panel button{
 	padding: 4px;
+	width: 100%;
 	font-weight:bold;
+}
+
+#messages-panel{
+	float: right;
+}
+#messages-panel span{
+	font-family: monospace;
+	font: monospace;
+	font-size: .9em;
+}
+
+#control-panel, #messages-panel{
+	margin: 0px;
+	padding: 5px;
+	border: 1px solid #888;
+	border-radius: 3px;
 }
 
 #board-container{
 	margin: 10px;
 	padding: 10px;
-	border: 1px solid #aaa;
-	clear: both;
-	border-radius: 5px;
+	clear: top;
+	width: 70%:
 }
 
 #board-radar{
@@ -87,6 +99,13 @@ body{
 	width: 407px;	
 }
 
+span.layout-label{
+	float:right;
+	color: #555;
+	font-weight: bold;
+	font-size: .9em;
+	margin-top: -20px;
+}
 
 .coord{
 	width:   30px;
@@ -108,6 +127,56 @@ body{
 	background-color: #c8c8c8;
 }
 
+
+.validating-banger{
+	background-color: red	!important;
+}
+
+
+#control-panel, #messages-panel{
+	width: 100px;
+}
+#control-panel span, #fleet-port span{
+	width: 100%;
+	text-align: right;
+	display: inline-block;
+	font-weight: bold;
+	color: #666;
+	margin-bottom: 15px;
+}
+
+#fleet-port{
+	margin: 10px;
+	padding: 5px;
+	float: left;
+	border: 1px solid #888;
+	border-radius: 3px;
+	clear: left;
+}
+#two-banger{
+	height: 55px;
+}
+#three-banger-1, #three-banger-2{
+	height: 85px;
+}
+#four-banger{
+	height: 120px;
+}
+#five-banger{
+	height: 150px;
+}
+.banger{
+	border: 2px solid #5555aa;
+	background-color: #777777;
+	box-shadow: 0 0 8px rgba(100, 100, 100, 0.8);
+	width: 20px;
+}
+#fleet-port .banger{
+	margin: 5px;
+	float: right;
+	clear: none;
+	cursor: move;
+}
 
 
 /* ** Clearfix ** */

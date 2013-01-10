@@ -3,32 +3,57 @@
 		$("#board-radar .coord[x-hacklenode-coord]").on("hover", function(){
 			consoleLog($(this).attr("x-hacklenode-coord"));
 		});
+		
+		var hacklenode = new Hacklenode({
+			name: "Chewbacca"
+		});
+		hacklenode.prepBangerFleet();		
 	});
 </script>
 
+
+
 <div id="board-container">
+
+<div id="messages-panel" class="clearfix">
+</div>
+
+<div id="control-panel" class="clearfix">
+	<span class="clearfix">Control Panel</span>
+	<button onclick="/newGame">New Game</button>
+	
+	<div id="fleet-port" class="clearfix">
+		<span class="clearfix">Banger Fleet</span>
+		<div id="two-banger" class="banger"></div>
+		<div id="three-banger-1" class="banger"></div>
+		<div id="three-banger-2" class="banger"></div>
+		<div id="four-banger" class="banger"></div>
+		<div id="five-banger" class="banger"></div>
+	</div>
+		
+</div>
+
+
 	<% 
-		var layouts = ["board-radar","board-ocean"];
+		var layouts = [
+			{id: "board-radar", label: "Radar"},
+			{id: "board-ocean", label: "Ocean"}
+		];
 		var cols = ["A","B","C","D","E","F","G","H","I","J"]; 
 		var rows = [1,2,3,4,5,6,7,8,9,10];
 	%>
 		
 	<% layouts.forEach(function(layout){ %>
-	<div id="<%=layout%>">
+	<div id="<%=layout.id%>">
 			<div class="col-headers">
-				<div class="coord row-label">&nbsp;</div>
-				<% cols.forEach(function(col){ %>
-					<div class="coord coord-label"><%= col %></div>
-				<% }); %>
-			</div>
+				<div class="coord row-label">&nbsp;</div><% cols.forEach(function(col){ %><div class="coord coord-label"><%= col %></div><% }); %>
+			</div><span class="layout-label"><%=layout.label%></span>
 			<% rows.forEach(function(row){ %>
 			<div class="row" class="board-layout">
-				<div class="coord row-label"><%=row%></div>
-				<% cols.forEach(function(col){ %>
-				<div class="coord" x-hacklenode-coord="<%= col%>,<%=row%>">&nbsp;</div>
-				<% }); %>
+				<div class="coord row-label"><%=row%></div><% cols.forEach(function(col){ %><div class="coord real-coord" x-hacklenode-coord="<%= col%>,<%=row%>">&nbsp;</div><% }); %>
 			</div>
 			<% }); %>
 	</div>
 	<% }); %>
+		
 </div>
