@@ -19,7 +19,9 @@ Hacklenode.prototype = {
 		consoleLog("prepBangerFleet() of Hacklenode '" + this.name + "'.");
 		
 		$(".banger").draggable({
-			revert:	"invalid"
+			revert:	"invalid",
+			obstacle: ".banger-positioned",
+			preventCollision: true
 		});
 		
 		$(".banger").on("drop", function(evt){
@@ -37,7 +39,7 @@ Hacklenode.prototype = {
 				$(banger).trigger("drop");
 			}
 		});
-		
+				
 		this.addMessage("Place each banger from your fleet onto your ocean.");
 	},
 	
@@ -53,7 +55,8 @@ Hacklenode.prototype = {
 		this.checkTopLeft(firstCoord, $(bangerElem));
 		this.checkBottomRight(lastCoord, $(bangerElem));
 		
-		$(this).removeClass("validating-banger");
+		$(bangerElem).removeClass("validating-banger");
+		$(bangerElem).addClass("banger-positioned");
 	},
 	
 	checkTopLeft: function(firstCoord, bangerElem){

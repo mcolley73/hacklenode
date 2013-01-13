@@ -170,12 +170,19 @@ span.layout-label{
 	background-color: #777777;
 	box-shadow: 0 0 8px rgba(100, 100, 100, 0.8);
 	width: 20px;
+	margin: 0px;
 }
 #fleet-port .banger{
 	margin: 5px;
 	float: right;
 	clear: none;
 	cursor: move;
+}
+.banger.ui-draggable-dragging{
+	margin: 0px !important;
+}
+.banger-positioned{
+	margin: 0px !important;
 }
 
 
