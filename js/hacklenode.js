@@ -20,13 +20,15 @@ Hacklenode.prototype = {
 		
 		$(".banger").draggable({
 			revert:	"invalid",
-			obstacle: ".banger-positioned",
-			preventCollision: true
+			obstacle: ".banger-positioned[id!='" + $(this).attr("id") + "']",
+			preventCollision: true,
+			start: function(){
+//				$(this).appendTo($(this.ocean));
+			}
 		});
 		
 		$(".banger").on("drop", function(evt){
 			$(this).addClass("validating-banger");
-			_this.validateBangerPosition(this);
 		});
 				
 		$("#board-ocean").droppable({
@@ -36,7 +38,19 @@ Hacklenode.prototype = {
 			drop : function(event, ui) {
 				consoleLog(".banger dropped!");
 				var banger = ui.draggable[0];
-				$(banger).trigger("drop");
+
+				//$(banger).trigger("drop");
+				$(banger).addClass("validating-banger");
+				
+				_this.validateBangerPosition($(banger));
+				if($(banger).collision(".banger-positioned").length > 0){
+					ui.draggable.draggable("option","revert",true);
+					$(banger).appendTo($("#banger-fleet"));
+				}else{
+					$(banger).appendTo($(this.ocean));
+					$(banger).addClass("banger-positioned");
+				}
+				$(banger).removeClass("validating-banger");
 			}
 		});
 				
@@ -45,18 +59,21 @@ Hacklenode.prototype = {
 	
 	validateBangerPosition: function(bangerElem){
 		consoleLog("validateBangerPosition(bangerElem)");
-		
-		//var top = $(bangerElem).css("top");
-		consoleLog(top);
+
 		var firstCoord = $(".real-coord", this.ocean)[0];
 		$(firstCoord).css("background-color","orange");
 		var lastCoord = $(".real-coord", this.ocean)[99];
 		$(lastCoord).css("background-color","purple");
+		
 		this.checkTopLeft(firstCoord, $(bangerElem));
 		this.checkBottomRight(lastCoord, $(bangerElem));
 		
-		$(bangerElem).removeClass("validating-banger");
-		$(bangerElem).addClass("banger-positioned");
+		// snap into place
+		this.snapTopToPriorRow($(bangerElem));
+		this.snapTopToPriorColumn($(bangerElem));
+		
+		// ok, it's in the ocean. in what position does it start?
+		this.determineBangerPlacement($(bangerElem));
 	},
 	
 	checkTopLeft: function(firstCoord, bangerElem){
@@ -108,7 +125,63 @@ Hacklenode.prototype = {
 		}
 	},
 	
+	determineBangerPlacement: function(bangerElem){
+		var bangerOffset = bangerElem.offset();
+		consoleLog(bangerOffset);
+		var row = this.findRow(bangerOffset);
+		consoleLog(row);
+	},
+	
+	snapTopToPriorRow: function(bangerElem){
+		$(bangerElem).css("float",null);
+		$(bangerElem).css("clear",null);
+		var row = this.findRow($(bangerElem).offset());
+		consoleLog(row);
+		var rowLabels = $(".row-label", this.ocean);
+		var rowLabelTop = $(rowLabels[row]).offset().top;
+		consoleLog(rowLabelTop);
+		$(bangerElem).offset({
+			top: rowLabelTop + 3, 
+			left: $(bangerElem).offset().left
+		});
+	},
+	
+	snapTopToPriorColumn: function(bangerElem){
+		var column = this.findColumn($(bangerElem).offset());
+		consoleLog(column);
+		var columnLabels = $(".coord-label", this.ocean);
+		var columnLabelLeft = $(columnLabels[column]).offset().left;
+		consoleLog(columnLabelLeft);
+		$(bangerElem).offset({
+			top: $(bangerElem).offset().top, 
+			left: columnLabelLeft + 4
+		});
+	},
+	
+	findRow: function(bangerOffset){
+		var row = -1;
+		$(".row-label", this.ocean).each(function(index, rowLabel){
+			if(index > 0){
+				if($(rowLabel).offset().top < bangerOffset.top){
+					row = index;
+				}
+			}
+		});
+		return row;
+	},
+	
+	findColumn: function(bangerOffset){
+		var column = -1;
+		$(".coord-label", this.ocean).each(function(index, coordLabel){
+			if($(coordLabel).offset().left < bangerOffset.left){
+				column = index;
+			}
+		});
+		return column;
+	},
+	
 	addMessage: function(message){
 		$("<span></span>").html(message).prependTo("#messages-panel");
 	}
+	
 };

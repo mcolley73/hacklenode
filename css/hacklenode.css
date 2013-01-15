@@ -22,7 +22,7 @@ body{
 
 #page-width{
 	width: 90%;
-	max-width: 800px;
+	width: 800px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -75,7 +75,7 @@ body{
 	margin: 10px;
 	padding: 10px;
 	clear: top;
-	width: 70%:
+	min-width: 700px;
 }
 
 #board-radar{
@@ -173,9 +173,7 @@ span.layout-label{
 	margin: 0px;
 }
 #fleet-port .banger{
-	margin: 5px;
-	float: right;
-	clear: none;
+	margin: 0px;
 	cursor: move;
 }
 .banger.ui-draggable-dragging{
